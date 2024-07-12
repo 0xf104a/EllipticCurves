@@ -1,0 +1,129 @@
+%! Author = Anna-Sophie Zaitsewa
+%! Date = 19.01.24
+
+% Preamble
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Document
+\begin{document}
+    \begin{titlepage}
+        \hspace{3cm}
+        \center\large\textsc{
+            Complex multiplication of elliptic curves and Hasse-Weil $L$-function:
+            Machine-learning approach to analyzing relations}
+        \vspace{1cm}
+        \center\textsc{Anna-Sophie Zaitsewa}
+        \center\small
+        \href{mailto:anna.zaitsewa@pm.me}{anna.zaitsewa@pm.me}
+        \center\textsc{Warszawa, Polska, 2024}
+        \author{Anna-Sophie Zaitsewa}
+    \end{titlepage}
+    \newpage
+    \tableofcontents
+    \newpage
+    \section{Abstract}\label{sec:abstract}
+    This paper is focused on exploring relation between Elliptic Curve's Hasse-Weil $L$-function
+    coefficients and CM(Complex-Multiplication) property.
+    The machine learning approach was used to analyze $L$-function coefficients.
+    Results have shown a possible relation between zeroes of $L$-function coefficients indexed by Sophie-Germain primes
+    and CM property of related elliptic curve.
+
+    \section{Introduction}\label{sec:introduction}
+    In this section basic definitions and formulas provided.
+    \subsection{Elliptic curve}\label{subsec:ellpiticcurve}
+    An elliptic curve is a curve given by following equation over a field $K$:
+    \[
+     y^2 + a_1xy+a_3y=x^3 + a_2x^2 + a_4x + a_5
+    \]
+    where $a_1, a_2, a_3, a_4, a_5 \in K$
+
+    The simplification of this equation is widely-known Weirstrass form:
+    \[
+        y^2 = x^3 + Ax + B
+    \]
+    where $A,B\in K$
+
+    The curve is called singular if a curve has point at which it is not smooth.
+    his occurs when the curve either has a cusp (a point with a discontinuous derivative) or a self-intersection.
+    In order for elliptic curve to be non-singular its' discriminant should be non-zero:
+    \[
+        \Delta = -16(4a^3+27b^2) \ne 0
+    \]
+    
+    \subsection{Complex multiplication}\label{subsec:complexmultiplication}
+
+
+    Isgoeny of elliptic curve $E_1$ to elliptic curve $E_2$ is a morphism $\phi: E_1\to E_2$
+    \footnote{Here $E_1$ and $E_2$ are used in terms of a point set of respective curve}, such that
+    $\phi(O_{E_1}) = O_{E_2}$.
+    As isogeny is a morphism the following property is satisfied: $\forall P,Q\in E_1:\phi(P+Q)=\phi(P)+\phi(Q)$
+
+    A set of all isogenies form homomorphism ring which is denoted as $Hom_k(E_1, E_2)$.
+
+    The endomorphisms of an elliptic curve is defined as follows:
+    \[
+        End_K(E) \stackrel{def}{=} Hom_K(E,E)
+    \]
+
+    The curve $E$ has complex multiplication if and only if its endomorpnisms ring is bigger then set of integers.
+
+    \subsection{Hasse-Weil $L$-function}\label{subsec:hasseweil_l_function}
+
+    The Hasse-Weil $L$-function is defined as follows:
+    \[
+        L(E,s) = \prod_p L_p(E,s)^{-1}
+    \]
+
+    Where $p\in\mathcal{P}$, $\mathcal{P}$ is set of all primes.
+
+    For prime $p$ factor of Hasse-Weil $L$-function is as follows:
+    \[
+        L_p(s,E)=
+        \begin{cases}
+            1-a_pp^{-s}+p^{1-2s}, \text{if } p \nmid N\\
+            1-a_pp^{-s}, \text{if } p | N, p^2 \nmid N\\
+            1, \text{if }p^2 | N
+        \end{cases}
+    \]
+
+    The coefficient $a_p$ is as follows:
+
+    $a_p = p+1-\#E(\mathbb{GF}_p)$ or $a_p = \pm 1$(for multiplicative reduction)
+
+    Where $\mathbb{GF}_p$ is Galois field of size $p$.
+
+    \section{Objective}\label{sec:objective}
+    Our main objective in this paper is to explore possible relations between vector of coefficients $a_p$ and
+    property of complex multiplication.
+    It is expected that the coefficients would reflect the algebraic properties.
+    This paper is focused on exploring relation between particularly Hasse-Weil $L$-function coefficients and complex
+    multiplication property without.
+
+    \section{Data}\label{sec:data}
+    As a primary data source LMFDB was used.
+    With use of SageMath there were found all elliptic curves possessing property of complex multiplication.
+    There were 2670 of such curves.
+    In order to keep dataset balance additional 2330 random elliptic curves
+    were selected.
+    Then for each curve coefficients $a_p$ were computed for $p<10000$.
+
+    For computation simplification the coefficients were calculated with procedure used for modular forms as in this paper
+    we consider
+    elliptic curves over rational fields which makes Taniyama-Weil-Shimura\footnote{Taniyama-Weil-Shimura theorem
+    states that any elliptic curve over rational field is a modular form. Which allows us to use algorithm } theorem
+    applicable to such curves.
+
+    \section{Methodology}\label{sec:methodology}
+
+    \section{Acknowledgments}\label{sec:acknowlodgements}
+    I want to thank K.S.Sorokin for suggesting and helping with this research in 2021.
+
+
+
+\end{document}
